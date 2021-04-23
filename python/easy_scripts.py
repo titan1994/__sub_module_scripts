@@ -49,7 +49,7 @@ def path_file_name_module(name, *args):
     return pro_folder
 
 
-PROJECT_GENERAL_FOLDER = path_file_name_module(__name__).parent.parent  # На тоненького
+PROJECT_GENERAL_FOLDER = path_file_name_module(__name__).parent.parent.parent  # На тоненького
 
 
 def path_general_folder(alt_folder=''):
