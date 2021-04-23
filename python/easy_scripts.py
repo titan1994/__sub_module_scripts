@@ -3,7 +3,7 @@
 Задание пути для файла относительно корня проекта.
 
 Запуск питона питоном. НЕ ПЕРЕМЕЩАТЬ, чтобы не сломать path_general_folder
-Hello 1
+Hello 1. World
 """
 
 from pathlib import Path
