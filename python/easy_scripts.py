@@ -32,6 +32,7 @@ def get_parent_path(file_stop = '.gitignore'):
         next_file = current_path / file_stop
         if next_file.exists():
             if last_found:
+                current_path = current_path.parent
                 continue
             else:
                 last_found = True
