@@ -4,7 +4,7 @@
 """
 
 from subprocess import check_output, CalledProcessError, STDOUT, Popen, PIPE
-from MODS.scripts.python.easy_scripts import PROJECT_GENERAL_FOLDER
+from easy_scripts import PROJECT_GENERAL_FOLDER
 
 
 def run(cmd, context=PROJECT_GENERAL_FOLDER):

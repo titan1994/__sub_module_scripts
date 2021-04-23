@@ -2,8 +2,8 @@
 Инспектирование модулей, поиск имен, пакетов.
 Задание пути для файла относительно корня проекта.
 
-Запуск питона питоном. НЕ ПЕРЕМЕЩАТЬ, чтобы не сломать path_general_folder
-Hello World. 22
+Запуск питона питоном.
+Самое важное - при импорте этого модуля кудато - добавить уровней?
 """
 
 from pathlib import Path
@@ -12,6 +12,46 @@ from pkgutil import iter_modules
 from importlib import import_module
 from os import system as system
 from sys import executable as __python_path
+
+
+def get_parent_path(file_stop = '.gitignore'):
+    """
+    Рекурсивное определение последнего файла снизу вверх
+    Получение таким образом корня проекта
+    В качестве файла берём '.gitignore'
+    """
+
+    count_deep = 0
+    max_deep = 50
+
+    current_path = Path(__file__).parent
+    this_path = current_path
+
+    last_found = False
+    while True:
+        next_file = current_path / file_stop
+        if next_file.exists():
+            if last_found:
+                continue
+            else:
+                last_found = True
+        else:
+            if last_found:
+                break
+            else:
+                count_deep = count_deep + 1
+                if count_deep >= max_deep:
+                    this_path = Path(__file__).parent
+                    print(f'YOUR PROJECT IS UGLY! USE {file_stop} IN GENERAL DIRECTORY!')
+                    break
+
+        this_path = current_path
+        current_path = current_path.parent
+
+    return this_path
+
+
+PROJECT_GENERAL_FOLDER = get_parent_path()
 
 
 def get_module_system(name):
@@ -47,9 +87,6 @@ def path_file_name_module(name, *args):
         pro_folder = pro_folder / name
 
     return pro_folder
-
-
-PROJECT_GENERAL_FOLDER = path_file_name_module(__name__).parent.parent.parent  # На тоненького
 
 
 def path_general_folder(alt_folder=''):
