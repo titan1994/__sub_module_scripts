@@ -4,10 +4,10 @@
 """
 
 from subprocess import check_output, CalledProcessError, STDOUT, Popen, PIPE
-from easy_scripts import PROJECT_GENERAL_FOLDER
+from . import easy_scripts
 
 
-def run(cmd, context=PROJECT_GENERAL_FOLDER):
+def run(cmd, context=easy_scripts.PROJECT_GENERAL_FOLDER):
     """
     Команды операционной системы
     :param context:
@@ -33,7 +33,7 @@ def run(cmd, context=PROJECT_GENERAL_FOLDER):
     return status_cmd, data_cmd
 
 
-def run_with_answer(cmd, answer=b'y\r' * 100, context=PROJECT_GENERAL_FOLDER):
+def run_with_answer(cmd, answer=b'y\r' * 100, context=easy_scripts.PROJECT_GENERAL_FOLDER):
     """
     Запуск команды с ответом
 
