@@ -2,7 +2,7 @@
 Для администрирования сервера. Выполнение команд операционной системы
 В КОНТЕКСТЕ КОРНЯ ПРОЕКТА
 """
-
+import os
 from subprocess import check_output, CalledProcessError, STDOUT, Popen, PIPE
 from . import easy_scripts
 
@@ -14,9 +14,14 @@ def run(cmd, context=easy_scripts.PROJECT_GENERAL_FOLDER):
     :param cmd:
     :return:
     """
-
     try:
-        data_cmd = check_output(cmd, cwd=context.absolute(), shell=True, universal_newlines=True, stderr=STDOUT)
+        data_cmd = check_output(
+            cmd,
+            cwd=context.absolute(),
+            shell=True,
+            universal_newlines=True,
+            stderr=STDOUT
+        )
         status_cmd = 0
 
     except CalledProcessError as ex:
