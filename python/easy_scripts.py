@@ -10,11 +10,11 @@ from pathlib import Path
 from inspect import getmembers, isclass
 from pkgutil import iter_modules
 from importlib import import_module
-from os import system as system
+from os import system as system, walk
 from sys import executable as __python_path
 
 
-def get_parent_path(file_stop = '.gitignore'):
+def get_parent_path(file_stop='.gitignore'):
     """
     Рекурсивное определение последнего файла снизу вверх
     Получение таким образом корня проекта
@@ -223,3 +223,19 @@ def run_python_file(python_file, params=''):
         print(file_run_pass)
         print(info)
         return None
+
+
+def get_include_object_from_catalog(src, exclude_shadows=True):
+    """
+    Получить список вложенных папок/файлов, исключая __/_
+    """
+    _, dirs, _ = next(walk(src))
+
+    path_folder = []
+    for name_dir in dirs:
+        if exclude_shadows:
+            if name_dir.startswith('__') or name_dir.startswith('_'):
+                continue
+        path_folder.append(name_dir)
+
+    return path_folder
